@@ -12,10 +12,10 @@ import {mSort, maskAmount, getDataFromBack} from './main/functions';
 
 const getDefaultState = async () => {
 	const defaultState = {
-		currentSection: 'transfers', 
+		currentSection: 'portfolios', 
 		columns: [
 			{ 
-				width: '550px', 
+				width: '200px', 
 				field: 'name', 
 				text: 'Название',
 				visible: true
@@ -28,10 +28,11 @@ const getDefaultState = async () => {
 				visible: true
 			},
 			{ 
-				width: '100px', 
+				width: '150px', 
 				field: 'amount', 
 				text: 'Сумма', 
 				type: 'float', 
+				headerClassName: 'header-amount',	
 				style: {textAlign: 'right', paddingRight: '15px'},
 				format: maskAmount,
 				visible: true
@@ -39,15 +40,16 @@ const getDefaultState = async () => {
 		],
 		
 		items: [
-			{id:1, name:'test11', isActive:false, amount: 100500}, 
-			{id:2,name:'IIS', isActive: true, amount: 35000}, 
-			{id:3,name:'ABC22', isActive: true, amount: 22000}, 
-			{id:4,name:'UFD', isActive: false, amount: 17000},
-			{id:5,name:'asads', isActive: false, amount: 17000},
-			{id:6,name:'fdfd', isActive: false, amount: undefined},
-			{id:7,name:'sadasd', isActive: false, amount: 17000},
-			{id:8,name:'xasda', isActive: false, amount: 17000},
-			{id:9,name:'tttsadasd', isActive: false}     
+			{id:1,name:'Открытие Брокер', isActive:true, amount: 100500}, 
+			{id:2,name:'Финам', isActive: true, amount: 35000}, 
+			{id:3,name:'Тинькофф Инвестиции', isActive: true, amount: 120000}, 
+			{id:4,name:'Сбербанк', isActive: true, amount: 17000},
+			{id:5,name:'ВТБ Капитал', isActive: true, amount: 17000},
+			{id:6,name:'БКС Брокер', isActive: false, amount: undefined},
+			{id:7,name:'ИК Фридом Финанс', isActive: true, amount: 17000},
+			{id:8,name:'Fidelity', isActive: true, amount: 17000},
+			{id:9,name:'Interactive brokers', isActive: true, amount: 800000},
+			{id:10,name:'TD Ameritrade', isActive: false} 
 		],		  
 		selectedItems: [], 		
 		settings: { 

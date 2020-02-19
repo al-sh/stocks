@@ -7,6 +7,7 @@ class MainMenu extends React.Component {
     const newItems = await getDataFromBack('/transfers.getall');  //переделать на redux-thunk?
     if (!newItems) {
       console.warn('Отсутствует подключение к БД');
+      alert('Отсутствует подключение к БД');
       return;     
     } 
     console.log(newItems);
@@ -20,6 +21,7 @@ class MainMenu extends React.Component {
     const newItems = await getDataFromBack('/getportfolios'); 
     if (!newItems) {
       console.warn('Отсутствует подключение к БД');
+      alert('Отсутствует подключение к БД');
       return;     
     } 
     console.log(newItems);
