@@ -1,0 +1,18 @@
+.MainMenu{
+    padding: 10px 0;
+    text-align: left;
+}
+
+ .MainMenu__Item{    
+    box-sizing: border-box;   
+    margin-right: 15px;
+    background: #ffffff;    
+    font-size: 17px; line-height: 21px; letter-spacing: 0; color: #43a047;
+    cursor: pointer;
+}
+.MainMenu__Item:focus{
+    outline: #229227 auto 1px; 
+}
+.MainMenu__Item-active{
+    font-weight: 600;
+}
