@@ -1,5 +1,5 @@
 import React from 'react';
-import {getNewId} from './functions';
+import {getNewId} from '../functions';
 
 //Redux
 import { connect } from 'react-redux';

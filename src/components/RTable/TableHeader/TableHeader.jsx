@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import HeadItem from './HeadItem';
-import {getPageRows} from './functions';
+import {getPageRows} from '../../functions';
 
 class TableHeader extends React.Component { 
   onChangeCheckBox = (event) => {

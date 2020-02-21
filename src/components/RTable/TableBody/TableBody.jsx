@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ScrollerRow from '../components/ScrollerRow';
+import ScrollerRow from './ScrollerRow';
 
-import {getPageRows} from './functions';
+import {getPageRows} from '../../functions';
 
 class TableBody extends React.Component { 
   shouldComponentUpdate(nextProps, nextState){
     //console.log('shouldComponentUpdate old props', this.props, 'nextProps:', nextProps);
     return true;
-  }
+  } 
 
   render() {   
     const items = this.props.items;    

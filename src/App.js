@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.css';
 import MainMenu from './components/menu/MainMenu';
-import Rscroller from './components/Rscroller';
+import RTable from './components/RTable/RTable';
 
 function App() {
   return (         
     <div className="App">      
       <MainMenu />
-      <Rscroller />      
+      <RTable />      
     </div>
   );
 }

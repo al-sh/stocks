@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import ToolbarTop from './ToolbarTop';
-import TableBody from './TableBody';
-import TableFooter from './TableFooter';
-import TableHeader from './TableHeader';
+import TableBody from './TableBody/TableBody';
+import TableFooter from './TableFooter/TableFooter';
+import TableHeader from './TableHeader/TableHeader';
 
 //custom components
 import ItemBlock from './ItemBlock';

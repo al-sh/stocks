@@ -2,7 +2,7 @@ import React from 'react';
 
 //Redux
 import { connect } from 'react-redux';
-import { toggleVisualSort } from '../store/actions';
+import { toggleVisualSort } from '../../../store/actions';
 
 class HeadItem extends React.Component {  
   sort  = (event) => {  
