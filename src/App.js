@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import MainMenu from './main/menu/MainMenu';
-import Rscroller from './main/Rscroller';
+import MainMenu from './components/menu/MainMenu';
+import Rscroller from './components/Rscroller';
 
 function App() {
   return (         

@@ -1,5 +1,5 @@
 //import { SORT.TOGGLE } from './actions';
-import {mSort, deleteItemFromArray, getPageRows, findEl} from '../../main/functions';
+import {mSort, deleteItemFromArray, getPageRows, findEl} from '../../components/functions';
 import Analytics from './Analytics'
 import Item from './Item'
 import Sort from './Sort'

@@ -1,4 +1,4 @@
-import {mSort, deleteItemFromArray} from '../../main/functions';
+import {mSort, deleteItemFromArray} from '../../components/functions';
 
 const Item = { //функции работы с элементом списка
   add: (state, action) => {

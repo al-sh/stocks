@@ -9,7 +9,7 @@ import { createStore } from 'redux'
 import rootReducer from './store/reducers/mainReducer'
 import { testPortfolios } from './store/testData'
 
-import {mSort, maskAmount} from './main/functions';
+import {mSort, maskAmount} from './components/functions';
 
 const getDefaultState = async () => {
 	const defaultState = {

@@ -1,4 +1,4 @@
-import {maskAmount} from '../../main/functions';
+import {maskAmount} from '../../components/functions';
 
 const Analytics = {  
   transfers: (state, action) => { 

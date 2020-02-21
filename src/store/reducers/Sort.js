@@ -1,4 +1,4 @@
-import {mSort} from '../../main/functions';
+import {mSort} from '../../components/functions';
 
 const Sort = { 
   toggle: (state, action) => {

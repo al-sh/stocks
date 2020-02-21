@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ScrollerRow from '../main/ScrollerRow';
+import ScrollerRow from '../components/ScrollerRow';
 
 import {getPageRows} from './functions';
 
