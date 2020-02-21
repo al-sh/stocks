@@ -70,7 +70,11 @@ const Switch = {
 				text: 'Сумма', 
 				type: 'float', 
 				style: {textAlign: 'right', paddingRight: '15px'},
-				format: (Transfers) => { return maskAmount( Transfers.reduce( (sum, item ) => { return sum + parseFloat(item.amount) }, 0 ) ) },
+				format: (Transfers) => {
+								if (Transfers) { //todo: add transfers to testPortfolios
+									return maskAmount( Transfers.reduce( (sum, item ) => { return sum + parseFloat(item.amount) }, 0 ) ) 
+								}								
+							},
 				visible: true
 			}
 		]

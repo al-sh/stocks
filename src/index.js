@@ -7,8 +7,9 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import rootReducer from './store/reducers/mainReducer'
+import { testPortfolios } from './store/testData'
 
-import {mSort, maskAmount, getDataFromBack} from './main/functions';
+import {mSort, maskAmount} from './main/functions';
 
 const getDefaultState = async () => {
 	const defaultState = {
@@ -39,18 +40,7 @@ const getDefaultState = async () => {
 			}
 		],
 		
-		items: [
-			{id:1,name:'Открытие Брокер', isActive:true, amount: 100500}, 
-			{id:2,name:'Финам', isActive: true, amount: 35000}, 
-			{id:3,name:'Тинькофф Инвестиции', isActive: true, amount: 120000}, 
-			{id:4,name:'Сбербанк', isActive: true, amount: 17000},
-			{id:5,name:'ВТБ Капитал', isActive: true, amount: 17000},
-			{id:6,name:'БКС Брокер', isActive: false, amount: undefined},
-			{id:7,name:'ИК Фридом Финанс', isActive: true, amount: 17000},
-			{id:8,name:'Fidelity', isActive: true, amount: 17000},
-			{id:9,name:'Interactive brokers', isActive: true, amount: 800000},
-			{id:10,name:'TD Ameritrade', isActive: false} 
-		],		  
+		items: testPortfolios,		  
 		selectedItems: [], 		
 		settings: { 
 			rowsinPage: 5,

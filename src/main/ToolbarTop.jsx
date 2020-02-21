@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {getDataFromBack} from './functions'; //may be need to move to reducers
 
 class ToolbarTop extends React.Component {
   deleteSelectedItems = (e) => {    
