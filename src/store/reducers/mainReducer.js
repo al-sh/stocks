@@ -43,6 +43,12 @@ const toggleSelectRow = (state, action) => {
   stateCopy.selectedItems = selectedItems;      
   stateCopy.showAddEditBlock = false;
   return stateCopy;
+}
+
+const toggleThrobber = (state, action) => {  
+  let stateCopy = Object.assign({}, state);
+  stateCopy.showThrobber = action.showThrobber;
+  return stateCopy;
 } 
 
 const deleteSelectedItems = (state, action) => {
@@ -142,6 +148,7 @@ const mainReducer = (state = [], action) => {
     case 'TOGGLE_ITEM_BLOCK': return toggleItemBlock(state, action);
     case 'TOGGLE_ROW_TOOLBAR': return toggleRowToolbar(state, action);
     case 'TOGGLE_SELECT_ROW':	return toggleSelectRow(state, action);
+    case 'TOGGLE_THROBBER':	return toggleThrobber(state, action);
     case 'SHIFT_CLICK': return shiftClick(state, action);			
    
 	  default:

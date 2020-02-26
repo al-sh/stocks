@@ -1,4 +1,5 @@
 @import './components/menu/Menu.css';
+@import './components/common/throbber/Throbber.css';
 
 .App {
   margin: auto;

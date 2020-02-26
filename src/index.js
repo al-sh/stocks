@@ -51,7 +51,8 @@ const getDefaultState = async () => {
 			editItem: null,
 			shiftClickItemId: null,
 			toolBarRowId: null
-		},		
+		},
+		showThrobber: false,
 		sortParams: [{field: "name", type: "default", ascOrder: true}]		
 	}; 
 	const newItems = null;  

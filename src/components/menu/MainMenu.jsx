@@ -2,34 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {getDataFromBack} from '../functions'; //may be need to move to reducers
 import { testPortfolios, testTransfers } from '../../store/testData'
+import {actSwitchToPortfolios, actSwitchToTransfers} from '../../store/actions' 
 
 class MainMenu extends React.Component {
   testDataWarnText = 'Отсутствует подключение к БД, показаны тестовые данные';
 
   switchToTransfers = async (e) => {
-    let newItems = await getDataFromBack('/transfers.getall');  //переделать на redux-thunk?    
-    if (!newItems) {
-      console.warn(this.testDataWarnText);
-      newItems = testTransfers;     
-    } 
-    console.log(newItems);
-    this.props.dispatch({
-      type: 'SWITCH.TRANSERS',
-      items: newItems
-    });
+    actSwitchToTransfers(this.props.dispatch);
   }
 
   switchToPortfolios = async (e) => {
-    let newItems = await getDataFromBack('/getportfolios'); 
-    if (!newItems) {
-      console.warn(this.testDataWarnText);
-      newItems = testPortfolios;     
-    } 
-    console.log(newItems);
-    this.props.dispatch({
-      type: 'SWITCH.PORTFOLIOS',
-      items: newItems
-    });
+    actSwitchToPortfolios(this.props.dispatch);
   }
   
   render() {
