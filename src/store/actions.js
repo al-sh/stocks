@@ -1,5 +1,5 @@
 import { testPortfolios, testTransfers } from './testData'
-import {getDataFromBack} from '../components/functions'; //may be need to move to reducers
+import {getDataFromBack} from '../components/functions';
 
 const testDataWarnText = 'Отсутствует подключение к БД, показаны тестовые данные';
 
@@ -14,35 +14,32 @@ function toggleThrobber(dispatch, visible){
       });
 }
 
-export async function actSwitchToPortfolios(dispatch) {
-    toggleThrobber(dispatch, true);
-    
-    let newItems = await getDataFromBack('/getportfolios'); 
-    if (!newItems) {
-      console.warn(testDataWarnText);
-      newItems = testPortfolios;     
-    } 
-    console.log(newItems);
-
-    dispatch({
-      type: 'SWITCH.PORTFOLIOS',
-      items: newItems
-    });
-    toggleThrobber(dispatch, false);
+const sections = {
+    portfolios: {
+        backUrl: '/getportfolios',
+        testItems: testPortfolios,
+        actionType: 'SWITCH.PORTFOLIOS'
+    },
+    transfers:{
+        backUrl: '/transfers.getall',
+        testItems: testTransfers,
+        actionType: 'SWITCH.TRANSFERS'
+    }
 }
 
-export async function actSwitchToTransfers(dispatch) {
+export async function actSwitchToSection(sectionName, dispatch) {
     toggleThrobber(dispatch, true);
     
-    let newItems = await getDataFromBack('/transfers.getall'); 
+    const selectedSection = sections[sectionName];
+    let newItems = await getDataFromBack(selectedSection.backUrl); 
     if (!newItems) {
       console.warn(testDataWarnText);
-      newItems = testTransfers;     
+      newItems = selectedSection.testItems;     
     } 
     console.log(newItems);
 
     dispatch({
-      type: 'SWITCH.TRANSERS',
+      type: selectedSection.actionType,
       items: newItems
     });
     toggleThrobber(dispatch, false);

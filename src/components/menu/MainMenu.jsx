@@ -1,18 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {getDataFromBack} from '../functions'; //may be need to move to reducers
-import { testPortfolios, testTransfers } from '../../store/testData'
-import {actSwitchToPortfolios, actSwitchToTransfers} from '../../store/actions' 
+import {actSwitchToSection} from '../../store/actions' 
 
 class MainMenu extends React.Component {
   testDataWarnText = 'Отсутствует подключение к БД, показаны тестовые данные';
 
   switchToTransfers = async (e) => {
-    actSwitchToTransfers(this.props.dispatch);
+    actSwitchToSection('transfers', this.props.dispatch);
   }
 
   switchToPortfolios = async (e) => {
-    actSwitchToPortfolios(this.props.dispatch);
+    actSwitchToSection('portfolios', this.props.dispatch);
   }
   
   render() {

@@ -139,7 +139,7 @@ const mainReducer = (state = [], action) => {
     case 'SORT.RUN': return Sort.run(state, action);	
     case 'SORT.TOGGLE': return Sort.toggle(state, action);
     
-    case 'SWITCH.TRANSERS': return Switch.transfers(state, action);    
+    case 'SWITCH.TRANSFERS': return Switch.transfers(state, action);    
     case 'SWITCH.PORTFOLIOS': return Switch.portfolios(state, action);    
 
     case 'DELETE_SELECTED_ITEMS':	return deleteSelectedItems(state, action);  
