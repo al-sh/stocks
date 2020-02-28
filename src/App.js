@@ -5,19 +5,19 @@ import MainMenu from './components/menu/MainMenu';
 import RTable from './components/RTable/RTable';
 import Throbber from './components/common/throbber/Throbber';
 
-class App extends React.Component { 
-  render() {  
-    return (         
-      <div className="App">      
+class App extends React.Component {
+  render() {
+    return (
+      <div className="App">
         <MainMenu />
-        { this.props.showThrobber ? <Throbber /> : <RTable /> }           
+        {this.props.showThrobber ? <Throbber /> : <RTable />}
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return {  
+  return {
     showThrobber: state.showThrobber
   }
 }

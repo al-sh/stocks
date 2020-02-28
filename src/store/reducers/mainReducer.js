@@ -1,5 +1,5 @@
 //import { SORT.TOGGLE } from './actions';
-import {mSort, deleteItemFromArray, getPageRows, findEl} from '../../components/functions';
+import { mSort, deleteItemFromArray, getPageRows, findEl } from '../../components/functions';
 import Analytics from './Analytics'
 import Item from './Item'
 import Sort from './Sort'
@@ -12,15 +12,15 @@ const goToPage = (state, action) => {
   return stateCopy;
 }
 
-const updateItems = (state, action) => {  
-  let stateCopy = Object.assign({}, state);  
+const updateItems = (state, action) => {
+  let stateCopy = Object.assign({}, state);
   stateCopy.items = action.items; //need copy?
   mSort(stateCopy.items, stateCopy.sortParams);
   return stateCopy;
 }
 
 const toggleItemBlock = (state, action) => {
-  let stateCopy = Object.assign({}, state);      
+  let stateCopy = Object.assign({}, state);
   stateCopy.settings.showAddEditBlock = action.showAddEditBlock;
   if (action.editItem) {
     stateCopy.settings.editItem = action.editItem;
@@ -32,128 +32,128 @@ const toggleItemBlock = (state, action) => {
 
 const toggleSelectRow = (state, action) => {
   const itemId = action.item.id;
-  let stateCopy = Object.assign({}, state);   
+  let stateCopy = Object.assign({}, state);
   let selectedItems = Object.assign([], stateCopy.selectedItems);
 
   if (~selectedItems.indexOf(itemId)) {
-    selectedItems.splice( selectedItems.indexOf(itemId), 1 );
+    selectedItems.splice(selectedItems.indexOf(itemId), 1);
   } else {
     selectedItems.push(itemId);
-  }  
-  stateCopy.selectedItems = selectedItems;      
+  }
+  stateCopy.selectedItems = selectedItems;
   stateCopy.showAddEditBlock = false;
   return stateCopy;
 }
 
-const toggleThrobber = (state, action) => {  
+const toggleThrobber = (state, action) => {
   let stateCopy = Object.assign({}, state);
   stateCopy.showThrobber = action.showThrobber;
   return stateCopy;
-} 
+}
 
 const deleteSelectedItems = (state, action) => {
-  let stateCopy = Object.assign({}, state);  
-  let items = Object.assign([], stateCopy.items); 
+  let stateCopy = Object.assign({}, state);
+  let items = Object.assign([], stateCopy.items);
   let selectedItems = Object.assign([], stateCopy.selectedItems);
 
-  for (let i=0; i<selectedItems.length; i++){
+  for (let i = 0; i < selectedItems.length; i++) {
     deleteItemFromArray(items, selectedItems[i]);
-  }  
+  }
 
   stateCopy.selectedItems = [];
-  stateCopy.items = items; 
+  stateCopy.items = items;
   return stateCopy;
 }
 
 const toggleActivePageRowSelection = (state, action) => {
-  let stateCopy = Object.assign({}, state); 
+  let stateCopy = Object.assign({}, state);
   let selectedItems = Object.assign([], stateCopy.selectedItems);
 
   if (action.selected) {
     selectedItems = [];
-    const activePageRows = getPageRows(stateCopy.items, stateCopy.page, stateCopy.rowsinPage);    
-    for (let i=0; i<activePageRows.length; i++){      
+    const activePageRows = getPageRows(stateCopy.items, stateCopy.page, stateCopy.rowsinPage);
+    for (let i = 0; i < activePageRows.length; i++) {
       selectedItems.push(activePageRows[i].id);
-    }    
+    }
   } else {
     selectedItems = [];
-  }    
+  }
   stateCopy.selectedItems = selectedItems;
   stateCopy.showAddEditBlock = false;
   return stateCopy;
 }
 
 const toggleRowToolbar = (state, action) => {
-  let stateCopy = Object.assign({}, state);   
+  let stateCopy = Object.assign({}, state);
   if (stateCopy.settings.toolBarRowId === action.rowId) {
     stateCopy.settings.toolBarRowId = null;
   } else {
     stateCopy.settings.toolBarRowId = action.rowId;
-  }  
+  }
   return stateCopy;
 }
 
 const shiftClick = (state, action) => {
   let stateCopy = Object.assign({}, state);
   let selectedItems = Object.assign([], stateCopy.selectedItems);
-  stateCopy.settings.toolBarRowId = null;   
+  stateCopy.settings.toolBarRowId = null;
   stateCopy.settings.showAddEditBlock = false;
 
-  if (stateCopy.settings.shiftClickItemId) {    
+  if (stateCopy.settings.shiftClickItemId) {
     let startItemIndex = findEl(stateCopy.items, stateCopy.settings.shiftClickItemId);
     let endItemIndex = findEl(stateCopy.items, action.rowId);
     //console.log('shiftClickItemId:'+shiftClickItemId+' startItemIndex:'+startItemIndex+' endItemIndex:'+endItemIndex);
-    if (startItemIndex>endItemIndex) {
+    if (startItemIndex > endItemIndex) {
       const tmp = startItemIndex;
       startItemIndex = endItemIndex;
       endItemIndex = tmp;
-    }        
+    }
 
     selectedItems = [];
-    for (let i=startItemIndex; i<=endItemIndex; i++){
-      selectedItems.push(stateCopy.items[i].id); 
+    for (let i = startItemIndex; i <= endItemIndex; i++) {
+      selectedItems.push(stateCopy.items[i].id);
     }
-    
-    stateCopy.settings.shiftClickItemId = stateCopy.items[endItemIndex].id;    
+
+    stateCopy.settings.shiftClickItemId = stateCopy.items[endItemIndex].id;
   } else {
     stateCopy.settings.shiftClickItemId = action.rowId;
     selectedItems.push(action.rowId);
-  }  
+  }
 
   stateCopy.selectedItems = selectedItems;
   return stateCopy;
 }
 
 const mainReducer = (state = [], action) => {
-	switch (action.type) {
+  switch (action.type) {
     case 'ANALYTICS.TRANSFERS': return Analytics.transfers(state, action);
-    
+
     case 'ITEM.ADD': return Item.add(state, action);
-    case 'ITEM.DELETE':	return Item.delete(state, action); 
+    case 'ITEM.DELETE': return Item.delete(state, action);
     case 'ITEM.EDIT': return Item.edit(state, action);
     case 'ITEMS.UPDATE': return updateItems(state, action);
 
     case 'DISPLAYSETTINGS.TOGGLE': return DisplaySettings.toggle(state, action);
     case 'DISPLAYSETTINGS.SAVE': return DisplaySettings.save(state, action);
 
-    case 'SORT.RUN': return Sort.run(state, action);	
+    case 'SORT.RUN': return Sort.run(state, action);
     case 'SORT.TOGGLE': return Sort.toggle(state, action);
-    
-    case 'SWITCH.TRANSFERS': return Switch.transfers(state, action);    
-    case 'SWITCH.PORTFOLIOS': return Switch.portfolios(state, action);    
 
-    case 'DELETE_SELECTED_ITEMS':	return deleteSelectedItems(state, action);  
-    case 'GO_TO_PAGE': return goToPage(state, action);   
-    case 'TOGGLE_ACTIVE_PAGE_ROW_SELECTION':  return toggleActivePageRowSelection(state, action); 
+    case 'SWITCH.TRANSFERS': return Switch.transfers(state, action);
+    case 'SWITCH.PORTFOLIOS': return Switch.portfolios(state, action);
+
+    case 'DELETE_SELECTED_ITEMS': return deleteSelectedItems(state, action);
+    case 'GO_TO_PAGE': return goToPage(state, action);
+    case 'TOGGLE_ACTIVE_PAGE_ROW_SELECTION': return toggleActivePageRowSelection(state, action);
     case 'TOGGLE_ITEM_BLOCK': return toggleItemBlock(state, action);
     case 'TOGGLE_ROW_TOOLBAR': return toggleRowToolbar(state, action);
-    case 'TOGGLE_SELECT_ROW':	return toggleSelectRow(state, action);
-    case 'TOGGLE_THROBBER':	return toggleThrobber(state, action);
-    case 'SHIFT_CLICK': return shiftClick(state, action);			
-   
-	  default:
-		  return state
-	}
+    case 'TOGGLE_SELECT_ROW': return toggleSelectRow(state, action);
+    case 'TOGGLE_THROBBER': return toggleThrobber(state, action);
+    case 'SHIFT_CLICK': return shiftClick(state, action);
+
+    default:
+      return state
+  }
 }
-  
+
 export default mainReducer

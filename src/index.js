@@ -9,40 +9,40 @@ import { createStore } from 'redux'
 import rootReducer from './store/reducers/mainReducer'
 import { testPortfolios } from './store/testData'
 
-import {mSort, maskAmount} from './components/functions';
+import { mSort, maskAmount } from './components/functions';
 
 const getDefaultState = async () => {
 	const defaultState = {
-		currentSection: 'portfolios', 
+		currentSection: 'portfolios',
 		columns: [
-			{ 
-				width: '200px', 
-				field: 'name', 
+			{
+				width: '200px',
+				field: 'name',
 				text: 'Название',
 				visible: true
 			},
-			{ 
-				width: '160px', 
-				field: 'isActive', 
-				text: 'Статус', 
-				format: (isActive) => { return isActive?'Активный':'Не активный'; },
+			{
+				width: '160px',
+				field: 'isActive',
+				text: 'Статус',
+				format: (isActive) => { return isActive ? 'Активный' : 'Не активный'; },
 				visible: true
 			},
-			{ 
-				width: '150px', 
-				field: 'amount', 
-				text: 'Сумма', 
-				type: 'float', 
-				headerClassName: 'header-amount',	
-				style: {textAlign: 'right', paddingRight: '15px'},
+			{
+				width: '150px',
+				field: 'amount',
+				text: 'Сумма',
+				type: 'float',
+				headerClassName: 'header-amount',
+				style: { textAlign: 'right', paddingRight: '15px' },
 				format: maskAmount,
 				visible: true
 			}
 		],
-		
-		items: testPortfolios,		  
-		selectedItems: [], 		
-		settings: { 
+
+		items: testPortfolios,
+		selectedItems: [],
+		settings: {
 			rowsinPage: 5,
 			activePage: 0,
 			withCheckBoxes: false,
@@ -53,14 +53,14 @@ const getDefaultState = async () => {
 			toolBarRowId: null
 		},
 		showThrobber: false,
-		sortParams: [{field: "name", type: "default", ascOrder: true}]		
-	}; 
-	const newItems = null;  
+		sortParams: [{ field: "name", type: "default", ascOrder: true }]
+	};
+	const newItems = null;
 	//const newItems = await getDataFromBack('/getportfolios/');  
-	
+
 	if (newItems) {
 		defaultState.items = newItems;
-	} else {		
+	} else {
 		console.warn('Отсутствует подключение к БД, показаны тестовые данные.');
 	}
 
@@ -70,20 +70,20 @@ const getDefaultState = async () => {
 }
 
 //let preLoadedState = getDefaultState();
-getDefaultState().then(result => { 
+getDefaultState().then(result => {
 	let preLoadedState = result;
-	const store = createStore(	
-		rootReducer, preLoadedState, 
-			window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+	const store = createStore(
+		rootReducer, preLoadedState,
+		window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 	);
-	
+
 	ReactDOM.render(
 		<Provider store={store}>
 			<App />
-		</Provider>, 
+		</Provider>,
 		document.getElementById('root')
 	);
-});  
+});
 
 
 // If you want your app to work offline and load faster, you can change
