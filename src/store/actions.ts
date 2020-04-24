@@ -3,18 +3,18 @@ import { getDataFromBack } from '../components/functions';
 
 const testDataWarnText = 'Отсутствует подключение к БД, показаны тестовые данные';
 
-export function toggleVisualSort(fieldName, sortType, ctrlPressed) {
+export function toggleVisualSort(fieldName: string, sortType: string, ctrlPressed: boolean) {
     return { type: 'SORT.TOGGLE', field: fieldName, sortType: sortType, ctrlPressed: ctrlPressed }
 }
 
-function toggleThrobber(dispatch, visible) {
+function toggleThrobber(dispatch: any, visible: boolean) {
     dispatch({
         type: 'TOGGLE_THROBBER',
         showThrobber: visible
     });
 }
 
-const sections = {
+const sections: any = {
     portfolios: {
         backUrl: '/getportfolios',
         testItems: testPortfolios,
@@ -27,7 +27,7 @@ const sections = {
     }
 }
 
-export async function actSwitchToSection(sectionName, dispatch) {
+export async function actSwitchToSection(sectionName: string, dispatch: any) {
     toggleThrobber(dispatch, true);
 
     const selectedSection = sections[sectionName];
