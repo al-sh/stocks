@@ -30,39 +30,39 @@ function sendPOST(url, data) {
   });
 }*/
 
-function findEl(arr, id){
-  for(let i=0; i<arr.length; i++){
-    if(arr[i].id===id){
-      return i;  
+function findEl(arr: any, id: number) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].id === id) {
+      return i;
     }
   }
 }
 
-function deleteItemFromArray(arr, itemId){
-  const indexToDel = findEl(arr, itemId); 
+function deleteItemFromArray(arr: any, itemId: number) {
+  const indexToDel = findEl(arr, itemId);
   arr.splice(indexToDel, 1);
 }
 
-function getNewId(scData){
+function getNewId(scData: any) {
   let newId = 0;
 
-  for(let i=0; i<scData.length; i++){
-    if ( parseInt(scData[i].id)> newId){
+  for (let i = 0; i < scData.length; i++) {
+    if (parseInt(scData[i].id) > newId) {
       newId = scData[i].id;
     }
   }
-  return newId+1;
+  return newId + 1;
 }
 
-function getPageRows(items, pageNumber, rowsinPage){  
+function getPageRows(items: any, pageNumber: number, rowsinPage: number) {
   const rowsCount = items.length;
-  
-  const firstRowNum = pageNumber * rowsinPage; 
-  let lastRowNum = (pageNumber + 1) * rowsinPage; 
-  if (lastRowNum>rowsCount) lastRowNum = rowsCount;
-  
+
+  const firstRowNum = pageNumber * rowsinPage;
+  let lastRowNum = (pageNumber + 1) * rowsinPage;
+  if (lastRowNum > rowsCount) lastRowNum = rowsCount;
+
   let rows = [];
-  for(let i=firstRowNum; i < lastRowNum; i++){
+  for (let i = firstRowNum; i < lastRowNum; i++) {
     rows.push(items[i]);
   }
 
@@ -72,63 +72,69 @@ function getPageRows(items, pageNumber, rowsinPage){
 //на входе - json, в котором указано в каком порядке сортируется и сам scrollerData
 //на выходе - отсортированный scrollerData (изменяет текущий)
 //const mSort = (scData, sortParams) => { 
-function mSort(scData, sortParams) {   
-  const defaultCompare = (a, b, fieldName, ascOrder) => {    
-    if (a[fieldName] > b[fieldName]) { 
-      return ascOrder?1:-1;
+function mSort(scData: any, sortParams: any) {
+  const defaultCompare = (a: any, b: any, fieldName: string, ascOrder: boolean) => {
+    if (a[fieldName] > b[fieldName]) {
+      return ascOrder ? 1 : -1;
     }
     if (a[fieldName] < b[fieldName]) {
-      return ascOrder?-1:1;         
-    }  
-    return 0; 
-  }
-
-  const floatCompare = (a, b, fieldName, ascOrder) => {  
-    const first = isFinite(parseFloat(a[fieldName]))?parseFloat(a[fieldName]):0;
-    const second = isFinite(parseFloat(b[fieldName]))?parseFloat(b[fieldName]):0;
-
-    if (first > second) { 
-      return ascOrder?1:-1;
-    }
-    if (first < second) {
-      return ascOrder?-1:1;         
-    }  
-    return 0; 
-  }
-
-  const singleCompare = (a, b, currentSortParam) => {
-    if (currentSortParam.type === 'float'){
-      return floatCompare(a, b, currentSortParam.field, currentSortParam.ascOrder);
-    }
-    if (currentSortParam.type === 'default'){
-      return defaultCompare(a, b, currentSortParam.field, currentSortParam.ascOrder);
-    }
-  }  
-  
-  const compareFunction = (a, b) => {
-    let currentSortParam;
-
-    for (let i=0; i<sortParams.length; i++){
-      currentSortParam = sortParams[i];
-      const currentResult = singleCompare(a, b, currentSortParam);
-      if (currentResult!==0) {
-        return currentResult;
-      } 
+      return ascOrder ? -1 : 1;
     }
     return 0;
-  } 
+  }
+
+  const floatCompare = (a: any, b: any, fieldName: string, ascOrder: boolean) => {
+    const first = isFinite(parseFloat(a[fieldName])) ? parseFloat(a[fieldName]) : 0;
+    const second = isFinite(parseFloat(b[fieldName])) ? parseFloat(b[fieldName]) : 0;
+
+    if (first > second) {
+      return ascOrder ? 1 : -1;
+    }
+    if (first < second) {
+      return ascOrder ? -1 : 1;
+    }
+    return 0;
+  }
+
+  interface ISortParam {
+    field: string, 
+    type: string, 
+    ascOrder: boolean
+  }
+
+  const singleCompare = (a: any, b: any, currentSortParam: ISortParam) => {
+    if (currentSortParam.type === 'float') {
+      return floatCompare(a, b, currentSortParam.field, currentSortParam.ascOrder);
+    }
+    if (currentSortParam.type === 'default') {
+      return defaultCompare(a, b, currentSortParam.field, currentSortParam.ascOrder);
+    }
+  }
+
+  const compareFunction = (a: any, b: any) => {
+    let currentSortParam;
+
+    for (let i = 0; i < sortParams.length; i++) {
+      currentSortParam = sortParams[i];
+      const currentResult = singleCompare(a, b, currentSortParam);
+      if (currentResult !== 0) {
+        return currentResult;
+      }
+    }
+    return 0;
+  }
 
   return scData.sort(compareFunction);
 }
 
-function maskAmount(x) {
+function maskAmount(x: any) {
   if (!isFinite(x)) {
     return '';
   }
 
   var parts = x.toString().split(".");
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-  parts[1] = parts[1]?parts[1].substring(0, 2):'00';
+  parts[1] = parts[1] ? parts[1].substring(0, 2) : '00';
   return parts.join(".");
 }
 
@@ -149,7 +155,7 @@ function maskAmount(x) {
   });
 }*/
 
-async function getDataFromBack(url) {
+async function getDataFromBack(url: string) {
   let response = await fetch(url);
   if (response.ok) {
     return await response.json();
