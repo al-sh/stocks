@@ -1,5 +1,5 @@
 import { maskAmount } from '../../components/functions';
-import { IPortfolio } from '../interfaces';
+import { IColumn, IPortfolio } from '../interfaces';
 
 const Analytics = {
 	transfers: (state: any, action: any) => {
@@ -23,7 +23,7 @@ const Analytics = {
 			return;
 		}
 
-		stateCopy.columns = [
+		const newColumns: IColumn[] = [
 			{
 				width: '100px',
 				field: 'dt',
@@ -76,6 +76,7 @@ const Analytics = {
 			}
 		];
 
+		stateCopy.columns = newColumns;
 		countItemAnalytics(stateCopy.items);
 
 		stateCopy.page = 0;

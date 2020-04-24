@@ -1,14 +1,32 @@
-interface ISortParam {
+export interface ISortParam {
     field: string,
     type: string,
     ascOrder: boolean
 }
 
-interface IPortfolio {
-    id: string,
+export interface IPortfolio {
+    id: number,
     name: string,
     isActive: boolean,
-    amount?: number
+    amount?: number,
+    Transfers?: ITransfer[]
 }
 
-export type { ISortParam, IPortfolio }
+export interface ITransfer {
+    id: number,
+    currencyId: number,
+    dt: string,
+    amount: number,
+    Portfolio: IPortfolio
+}
+
+export interface IColumn{
+    width: string, //todo - number
+    field: string,
+    text: string,
+    type?: string,
+    headerClassName?: string,
+    style?: object,
+    format?: any, //todo - make required?
+    visible: true
+}

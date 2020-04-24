@@ -1,7 +1,7 @@
 import { mSort, deleteItemFromArray } from '../../components/functions';
 
 const Item = { //функции работы с элементом списка
-  add: (state, action) => {
+  add: (state: any, action: any) => {
     let stateCopy = Object.assign({}, state);
     let items = Object.assign([], stateCopy.items);
     items.push(action.item);
@@ -13,7 +13,7 @@ const Item = { //функции работы с элементом списка
     return stateCopy;
   },
 
-  edit: (state, action) => {
+  edit: (state: any, action: any) => {
     //let stateCopy = getObjCopy(state);
     let stateCopy = Object.assign({}, state);
     let items = Object.assign([], stateCopy.items);
@@ -28,7 +28,7 @@ const Item = { //функции работы с элементом списка
     return stateCopy;
   },
 
-  delete: (state, action) => {
+  delete: (state: any, action: any) => {
     let stateCopy = Object.assign({}, state);
     let items = Object.assign([], stateCopy.items);
 

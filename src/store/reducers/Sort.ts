@@ -1,7 +1,8 @@
 import { mSort } from '../../components/functions';
+import { ISortParam } from '../interfaces';
 
 const Sort = {
-  toggle: (state, action) => {
+  toggle: (state: any, action: any) => {
     const selectedClause = {
       field: action.field,
       type: action.sortType,
@@ -9,7 +10,7 @@ const Sort = {
     };
 
     let stateCopy = Object.assign({}, state);
-    let sortParams = Object.assign([], stateCopy.sortParams);
+    let sortParams: ISortParam[] = Object.assign([], stateCopy.sortParams);
 
     if (sortParams.length > 0) {
       if (sortParams[0].field === selectedClause.field) {
@@ -45,7 +46,7 @@ const Sort = {
     return stateCopy;
   },
 
-  run: (state, action) => {
+  run: (state: any, action: any) => {
     let stateCopy = Object.assign({}, state);
     let newItems = Object.assign([], stateCopy.items);
 
