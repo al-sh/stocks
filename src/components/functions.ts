@@ -1,3 +1,5 @@
+import { ISortParam } from '../store/interfaces';
+
 /*function formatDate(dt){ 
   const lPadZeros = value => { return value.toString().length===1?'0'+value:value }
   
@@ -94,12 +96,6 @@ function mSort(scData: any, sortParams: any) {
       return ascOrder ? -1 : 1;
     }
     return 0;
-  }
-
-  interface ISortParam {
-    field: string, 
-    type: string, 
-    ascOrder: boolean
   }
 
   const singleCompare = (a: any, b: any, currentSortParam: ISortParam) => {

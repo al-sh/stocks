@@ -1,14 +1,15 @@
 import { maskAmount } from '../../components/functions';
+import { IPortfolio } from '../interfaces';
 
 const Analytics = {
-	transfers: (state, action) => {
+	transfers: (state: any, action: any) => {
 		let discountPercent = 6;
 
-		function countItemAnalytics(aData) {
+		function countItemAnalytics(aData: any) {
 			for (let i = 0; i < aData.length; i++) {
 				const item = aData[i];
-				const dt = new Date(item.dt);
-				const now = new Date();
+				const dt: any = new Date(item.dt);
+				const now: any = new Date();
 				item.daysCount = (now - dt) / (1000 * 60 * 60 * 24);
 				item.amountDisc = item.amount * (1 + discountPercent / 100 * item.daysCount / 366);
 			}
@@ -27,21 +28,21 @@ const Analytics = {
 				width: '100px',
 				field: 'dt',
 				text: 'Дата',
-				format: (val) => { const dt = new Date(val); return dt.toLocaleDateString() },
+				format: (val: any) => { const dt = new Date(val); return dt.toLocaleDateString() },
 				visible: true
 			},
 			{
 				width: '200px',
 				field: 'Portfolio',
 				text: 'Портфель',
-				format: (Portfolio) => { return Portfolio.name; },
+				format: (Portfolio: IPortfolio) => { return Portfolio.name; },
 				visible: true
 			},
 			{
 				width: '150px',
 				field: 'Portfolio',
 				text: 'Статус',
-				format: (Portfolio) => { return Portfolio.isActive ? 'Активный' : 'Не активный'; },
+				format: (Portfolio: IPortfolio) => { return Portfolio.isActive ? 'Активный' : 'Не активный'; },
 				visible: true
 			},
 			{
