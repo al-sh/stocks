@@ -41,13 +41,13 @@ function findEl(arr: any, id: number): number {
   return -1;
 }
 
-function deleteItemFromArray(arr: any, itemId: number) {
-  const indexToDel = findEl(arr, itemId);
+function deleteItemFromArray(arr: any, itemId: number): void {
+  const indexToDel: number = findEl(arr, itemId);
   arr.splice(indexToDel, 1);
 }
 
-function getNewId(scData: any) {
-  let newId = 0;
+function getNewId(scData: any): number {
+  let newId: number = 0;
 
   for (let i = 0; i < scData.length; i++) {
     if (parseInt(scData[i].id) > newId) {
