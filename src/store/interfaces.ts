@@ -30,3 +30,24 @@ export interface IColumn{
     format?: any, //todo - make required?
     visible: true
 }
+
+export interface ISettings{
+    rowsinPage: number,
+    activePage: number,
+    withCheckBoxes: boolean,
+    showDisplaySettings: boolean,
+    showAddEditBlock: boolean,
+    editItem: any,
+    shiftClickItemId: any,
+    toolBarRowId: any
+}
+
+export interface IState{
+    currentSection: string,
+    columns: IColumn[],
+    items: any,
+    selectedItems: any,
+    settings: ISettings,
+    showThrobber: boolean,
+    sortParams: ISortParam[]
+}
