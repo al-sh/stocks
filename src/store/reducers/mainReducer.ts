@@ -6,20 +6,20 @@ import Sort from './Sort'
 import DisplaySettings from './DisplaySettings'
 import Switch from './Switch'
 
-const goToPage = (state, action) => {
+const goToPage = (state: any, action: any) => {
   let stateCopy = Object.assign({}, state);
   stateCopy.settings.activePage = action.page;
   return stateCopy;
 }
 
-const updateItems = (state, action) => {
+const updateItems = (state: any, action: any) => {
   let stateCopy = Object.assign({}, state);
   stateCopy.items = action.items; //need copy?
   mSort(stateCopy.items, stateCopy.sortParams);
   return stateCopy;
 }
 
-const toggleItemBlock = (state, action) => {
+const toggleItemBlock = (state: any, action: any) => {
   let stateCopy = Object.assign({}, state);
   stateCopy.settings.showAddEditBlock = action.showAddEditBlock;
   if (action.editItem) {
@@ -30,7 +30,7 @@ const toggleItemBlock = (state, action) => {
   return stateCopy;
 }
 
-const toggleSelectRow = (state, action) => {
+const toggleSelectRow = (state: any, action: any) => {
   const itemId = action.item.id;
   let stateCopy = Object.assign({}, state);
   let selectedItems = Object.assign([], stateCopy.selectedItems);
@@ -45,13 +45,13 @@ const toggleSelectRow = (state, action) => {
   return stateCopy;
 }
 
-const toggleThrobber = (state, action) => {
+const toggleThrobber = (state: any, action: any) => {
   let stateCopy = Object.assign({}, state);
   stateCopy.showThrobber = action.showThrobber;
   return stateCopy;
 }
 
-const deleteSelectedItems = (state, action) => {
+const deleteSelectedItems = (state: any, action: any) => {
   let stateCopy = Object.assign({}, state);
   let items = Object.assign([], stateCopy.items);
   let selectedItems = Object.assign([], stateCopy.selectedItems);
@@ -65,7 +65,7 @@ const deleteSelectedItems = (state, action) => {
   return stateCopy;
 }
 
-const toggleActivePageRowSelection = (state, action) => {
+const toggleActivePageRowSelection = (state: any, action: any) => {
   let stateCopy = Object.assign({}, state);
   let selectedItems = Object.assign([], stateCopy.selectedItems);
 
@@ -83,7 +83,7 @@ const toggleActivePageRowSelection = (state, action) => {
   return stateCopy;
 }
 
-const toggleRowToolbar = (state, action) => {
+const toggleRowToolbar = (state: any, action: any) => {
   let stateCopy = Object.assign({}, state);
   if (stateCopy.settings.toolBarRowId === action.rowId) {
     stateCopy.settings.toolBarRowId = null;
@@ -93,15 +93,15 @@ const toggleRowToolbar = (state, action) => {
   return stateCopy;
 }
 
-const shiftClick = (state, action) => {
+const shiftClick = (state: any, action: any) => {
   let stateCopy = Object.assign({}, state);
   let selectedItems = Object.assign([], stateCopy.selectedItems);
   stateCopy.settings.toolBarRowId = null;
   stateCopy.settings.showAddEditBlock = false;
 
   if (stateCopy.settings.shiftClickItemId) {
-    let startItemIndex = findEl(stateCopy.items, stateCopy.settings.shiftClickItemId);
-    let endItemIndex = findEl(stateCopy.items, action.rowId);
+    let startItemIndex: number = findEl(stateCopy.items, stateCopy.settings.shiftClickItemId);
+    let endItemIndex: number = findEl(stateCopy.items, action.rowId);
     //console.log('shiftClickItemId:'+shiftClickItemId+' startItemIndex:'+startItemIndex+' endItemIndex:'+endItemIndex);
     if (startItemIndex > endItemIndex) {
       const tmp = startItemIndex;
@@ -124,7 +124,7 @@ const shiftClick = (state, action) => {
   return stateCopy;
 }
 
-const mainReducer = (state = [], action) => {
+const mainReducer = (state = [], action: any) => {
   switch (action.type) {
     case 'ANALYTICS.TRANSFERS': return Analytics.transfers(state, action);
 

@@ -32,12 +32,13 @@ function sendPOST(url, data) {
   });
 }*/
 
-function findEl(arr: any, id: number) {
+function findEl(arr: any, id: number): number {
   for (let i = 0; i < arr.length; i++) {
     if (arr[i].id === id) {
       return i;
     }
   }
+  return -1;
 }
 
 function deleteItemFromArray(arr: any, itemId: number) {
@@ -74,7 +75,7 @@ function getPageRows(items: any, pageNumber: number, rowsinPage: number) {
 //на входе - json, в котором указано в каком порядке сортируется и сам scrollerData
 //на выходе - отсортированный scrollerData (изменяет текущий)
 //const mSort = (scData, sortParams) => { 
-function mSort(scData: any, sortParams: any) {
+function mSort(scData: any, sortParams: ISortParam[]) {
   const defaultCompare = (a: any, b: any, fieldName: string, ascOrder: boolean) => {
     if (a[fieldName] > b[fieldName]) {
       return ascOrder ? 1 : -1;

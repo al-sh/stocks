@@ -1,12 +1,12 @@
 import { maskAmount } from '../../components/functions';
-import { IPortfolio, ITransfer } from '../interfaces';
+import { IColumn, IPortfolio, ITransfer } from '../interfaces';
 
 const Switch = {
 
 	transfers: (state: any, action: any) => {
 		let stateCopy = Object.assign({}, state);
 		stateCopy.currentSection = 'transfers';
-		stateCopy.columns = [
+		const newColumns: IColumn[] = [
 			{
 				width: '100px',
 				field: 'dt',
@@ -42,6 +42,7 @@ const Switch = {
 
 		//const newItems = await getDataFromBack('/transfers.getall');  
 		//console.log(newItems);
+		stateCopy.columns = newColumns;
 		stateCopy.items = action.items;
 
 		stateCopy.page = 0;
@@ -51,7 +52,7 @@ const Switch = {
 	portfolios: (state: any, action: any) => {
 		let stateCopy = Object.assign({}, state);
 		stateCopy.currentSection = 'portfolios';
-		stateCopy.columns = [
+		const newColumns: IColumn[] = [
 			{
 				width: '250px',
 				field: 'name',
@@ -81,6 +82,7 @@ const Switch = {
 		]
 
 		//console.log(newItems);
+		stateCopy.columns = newColumns;
 		stateCopy.items = action.items;
 
 		stateCopy.page = 0;
