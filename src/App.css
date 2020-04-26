@@ -1,3 +1,4 @@
+@import './components/analytics/Analytics.css';
 @import './components/menu/Menu.css';
 @import './components/common/throbber/Throbber.css';
 @import './components/RTable/RTable.css';

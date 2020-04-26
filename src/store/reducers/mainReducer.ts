@@ -124,8 +124,9 @@ const shiftClick = (state: any, action: any) => {
   return stateCopy;
 }
 
-const mainReducer = (state = [], action: any) => {
+const mainReducer = (state: any = [], action: any) => {
   switch (action.type) {
+    case 'ANALYTICS.TOGGLE': return Analytics.toggle(state, action);
     case 'ANALYTICS.TRANSFERS': return Analytics.transfers(state, action);
 
     case 'ITEM.ADD': return Item.add(state, action);

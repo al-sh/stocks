@@ -44,6 +44,7 @@ export interface ISettings{
 }
 
 export interface IState{
+    analytics: any,
     currentSection: string,
     columns: IColumn[],
     items: any,

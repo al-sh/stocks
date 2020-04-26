@@ -1,0 +1,15 @@
+.Analytics {
+    display: inline-block;
+    margin-top: 20px;
+    box-sizing: border-box;
+    width: 500px;
+    padding: 10px 0 10px 10px;
+    border: 1px solid #99C7DF;
+    border-radius: 3px;
+    background-color: #FFFFFF;
+}
+
+.Analytics__Label{
+    display: inline-block;
+    width: 150px;
+}

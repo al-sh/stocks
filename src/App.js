@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import './App.css';
+import Analytics from './components/analytics/Analytics';
 import MainMenu from './components/menu/MainMenu';
 import RTable from './components/RTable/RTable';
 import Throbber from './components/common/throbber/Throbber';
@@ -11,6 +12,7 @@ class App extends React.Component {
       <div className="App">
         <MainMenu />
         {this.props.showThrobber ? <Throbber /> : <RTable />}
+        {this.props.showAnalytics ? <Analytics /> : null }
       </div>
     );
   }
@@ -18,7 +20,8 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    showThrobber: state.showThrobber
+    showThrobber: state.showThrobber,
+    showAnalytics: state.analytics.show
   }
 }
 

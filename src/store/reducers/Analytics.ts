@@ -1,8 +1,14 @@
 import { maskAmount } from '../../components/functions';
-import { IColumn, IPortfolio } from '../interfaces';
+import { IColumn, IPortfolio, IState } from '../interfaces';
 
 const Analytics = {
-	transfers: (state: any, action: any) => {
+	toggle: (state: IState, action: any): IState => {
+		let stateCopy = Object.assign({}, state);
+		stateCopy.analytics.show = action.show;
+		return stateCopy;
+	},
+
+	transfers: (state: IState, action: any): IState => {
 		let discountPercent = 6;
 
 		function countItemAnalytics(aData: any) {
@@ -20,9 +26,10 @@ const Analytics = {
 		let stateCopy = Object.assign({}, state);
 		if (stateCopy.currentSection !== 'transfers') {
 			console.warn('Аналитика пока доступна только для зачислений');
-			return;
+			return stateCopy;
 		}
 
+		stateCopy.analytics.show = true;
 		const newColumns: IColumn[] = [
 			{
 				width: '100px',
@@ -39,7 +46,7 @@ const Analytics = {
 				visible: true
 			},
 			{
-				width: '150px',
+				width: '120px',
 				field: 'Portfolio',
 				text: 'Статус',
 				format: (Portfolio: IPortfolio) => { return Portfolio.isActive ? 'Активный' : 'Не активный'; },
@@ -56,10 +63,11 @@ const Analytics = {
 				visible: true
 			},
 			{
-				width: '120px',
+				width: '140px',
 				field: 'daysCount',
 				text: 'Кол-во дней',
 				type: 'float',
+				headerClassName: 'header-amount',
 				style: { textAlign: 'right', paddingRight: '15px' },
 				format: maskAmount,
 				visible: true
@@ -79,7 +87,7 @@ const Analytics = {
 		stateCopy.columns = newColumns;
 		countItemAnalytics(stateCopy.items);
 
-		stateCopy.page = 0;
+		stateCopy.settings.activePage = 0;
 		return stateCopy;
 	},
 

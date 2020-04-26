@@ -3,6 +3,9 @@ import { IState } from './interfaces'
 import { maskAmount } from '../components/functions';
 
 export const defaultState: IState = {
+    analytics: {
+        currentPortfolioValue: 400000
+    }, 
     currentSection: 'portfolios',
     columns: [
         {
