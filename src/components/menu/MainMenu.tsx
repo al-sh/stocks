@@ -1,17 +1,25 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, ConnectedProps } from 'react-redux';
 import {actSwitchToSection} from '../../store/actions' 
 import { IState } from '../../store/interfaces'
 
-interface MainMenuProps {
-  dispatch: any,
-  currentSection: string
-}
-
-const mapStateToProps = (state: IState) => {
+const mapState = (state: IState) => {
   return {  
     currentSection: state.currentSection
   }
+}
+
+const mapDispatch = null;
+
+const connector = connect(mapState, mapDispatch);
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+interface ReduxProps {
+  dispatch: any
+}
+
+interface MainMenuProps extends ReduxProps {
+  currentSection: string
 }
 
 class MainMenu extends React.Component<MainMenuProps, IState> {
@@ -35,4 +43,4 @@ class MainMenu extends React.Component<MainMenuProps, IState> {
   }
 }
 
-export default connect(mapStateToProps, null)(MainMenu)
+export default connector(MainMenu)
