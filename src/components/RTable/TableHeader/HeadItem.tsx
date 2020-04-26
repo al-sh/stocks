@@ -22,7 +22,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 
 interface HeadItemProps extends PropsFromRedux, IColumn {
   headerStyle?: any
-  sortIndex?: string,  
+  sortIndex?: number,  
   sortOrderClassName?: string,
 }
 

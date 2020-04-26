@@ -21,14 +21,15 @@ export interface ITransfer {
 }
 
 export interface IColumn{
-    width: string, //todo - number
+    width?: string, //todo - number
     field: string,
     text: string,
     type?: string,
+    visible: true
     headerClassName?: string,
     style?: object,
     format?: any, //todo - make required?
-    visible: true
+    headerStyle? : any,
 }
 
 export interface ISettings{
