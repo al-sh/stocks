@@ -25,7 +25,8 @@ class ToolbarTop extends React.Component {
   showTransfersAnalytics = (e) => {
     this.props.dispatch({
       type: 'ANALYTICS.TRANSFERS',
-      showDisplaySettings: true
+      showDisplaySettings: true,
+      discountRate: 6
     });
   }
   

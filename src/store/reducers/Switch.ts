@@ -73,7 +73,7 @@ const Switch = {
 				type: 'float',
 				style: { textAlign: 'right', paddingRight: '15px' },
 				format: (Transfers: ITransfer[]) => {
-					if (Transfers) { //todo: add transfers to testPortfolios
+					if (Transfers) {
 						return maskAmount(Transfers.reduce((sum, item) => { return sum + item.amount }, 0))
 					}
 				},

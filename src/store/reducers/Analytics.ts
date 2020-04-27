@@ -9,7 +9,8 @@ const Analytics = {
 	},
 
 	transfers: (state: IState, action: any): IState => {
-		let discountPercent = 6;
+		const discountRate: number = action.discountRate ? action.discountRate : state.analytics.discountRate;
+		const currentPortfolioValue: number = action.currentPortfolioValue ? action.currentPortfolioValue : state.analytics.currentPortfolioValue;
 
 		function countItemAnalytics(aData: any) {
 			for (let i = 0; i < aData.length; i++) {
@@ -17,7 +18,8 @@ const Analytics = {
 				const dt: any = new Date(item.dt);
 				const now: any = new Date();
 				item.daysCount = (now - dt) / (1000 * 60 * 60 * 24);
-				item.amountDisc = item.amount * (1 + discountPercent / 100 * item.daysCount / 366);
+				item.durationCoef = item.daysCount / 366;
+				item.amountDisc = item.amount * (1 + discountRate / 100 * item.durationCoef);
 			}
 
 			return aData;
@@ -75,7 +77,7 @@ const Analytics = {
 			{
 				width: '120px',
 				field: 'amountDisc',
-				text: 'Под ' + discountPercent + ' %',
+				text: 'Под ' + discountRate + ' %',
 				type: 'float',
 				headerClassName: 'header-amount',
 				style: { textAlign: 'right', paddingRight: '15px' },
@@ -86,6 +88,10 @@ const Analytics = {
 
 		stateCopy.columns = newColumns;
 		countItemAnalytics(stateCopy.items);
+		stateCopy.analytics.NPV = maskAmount(stateCopy.items.reduce((sum: number, item: any) => { return sum + item.amountDisc }, 0));
+		stateCopy.analytics.amountAll = stateCopy.items.reduce((sum: number, item: any) => { return sum + item.amount }, 0);
+		let amountAllXDuration = stateCopy.items.reduce((sum: number, item: any) => { return sum + item.amount * item.durationCoef }, 0)
+		stateCopy.analytics.irr = (currentPortfolioValue - stateCopy.analytics.amountAll) / amountAllXDuration;
 
 		stateCopy.settings.activePage = 0;
 		return stateCopy;
