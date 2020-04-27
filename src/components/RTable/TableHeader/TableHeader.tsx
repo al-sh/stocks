@@ -29,9 +29,6 @@ const connector = connect(mapState, mapDispatch);
 type IPropsFromRedux = ConnectedProps<typeof connector>
 
 interface ITableHeaderProps extends IPropsFromRedux {
-  items: any
-  page: number,
-  rowsinPage: number,
 }
 
 class TableHeader extends React.Component<ITableHeaderProps, IState>{
