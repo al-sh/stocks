@@ -1,15 +1,30 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, ConnectedProps } from 'react-redux';
 import ScrollerRow from './ScrollerRow';
 
 import {getPageRows} from '../../functions';
+import { IState } from '../../../store/interfaces';
 
-class TableBody extends React.Component { 
-  shouldComponentUpdate(nextProps, nextState){
-    //console.log('shouldComponentUpdate old props', this.props, 'nextProps:', nextProps);
-    return true;
-  } 
+const mapState = (state: IState) => {
+  return {
+    items: state.items,
+    activePage: state.settings.activePage,
+    rowsinPage: state.settings.rowsinPage,  
+    toolBarRowId: state.settings.toolBarRowId,  
+    selectedItems: state.selectedItems    
+  }
+}
 
+const mapDispatch = (dispatch: any) =>{
+  return {
+    dispatch: (action: any) => { dispatch(action) }
+  }
+}
+
+const connector = connect(mapState, mapDispatch);
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+class TableBody extends React.Component<PropsFromRedux, IState> { 
   render() {   
     const items = this.props.items;    
     const activePage = this.props.activePage;
@@ -32,14 +47,4 @@ class TableBody extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    items: state.items,
-    activePage: state.settings.activePage,
-    rowsinPage: state.settings.rowsinPage,  
-    toolBarRowId: state.settings.toolBarRowId,  
-    selectedItems: state.selectedItems    
-  }
-}
-
-export default connect(mapStateToProps)(TableBody)
+export default connector(TableBody)

@@ -3,7 +3,14 @@ import { connect } from 'react-redux';
 import RowContent from './RowContent';
 import ToolbarRow from './ToolbarRow';
 
-class ScrollerRow extends React.Component { 
+interface ScrollerRowProps{
+  data: any,
+  needShowToolbar: boolean,
+  selected: boolean
+}
+
+
+class ScrollerRow extends React.Component<ScrollerRowProps, {}> { 
   render() {
     const item = this.props.data;
     
