@@ -5,7 +5,7 @@ import { IState } from '../../store/interfaces';
 const mapState = (state: IState) => {
   return {
     currentSection: state.currentSection,
-    settings: state.settings
+    withCheckBoxes: state.settings.withCheckBoxes
   }
 }
 
@@ -49,7 +49,7 @@ class ToolbarTop extends React.Component<IPropsFromRedux, IState> {
 
   render() {
     const buttons = [];
-    if (this.props.settings.withCheckBoxes){
+    if (this.props.withCheckBoxes){
       buttons.push(<button key="btnDel" onClick={this.deleteSelectedItems} className="toolbarButton">Удалить</button>);
     }
     //buttons.push(<button key="btnAdd" onClick={this.showItemBlock} className="toolbarButton">Добавить</button>);

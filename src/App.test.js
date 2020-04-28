@@ -9,21 +9,32 @@ import rootReducer from './store/reducers/mainReducer'
 
 import { mSort } from './components/functions';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  mSort(defaultState.items, defaultState.sortParams);
-  let preLoadedState = defaultState;
+const rootDiv = document.createElement('div');
 
-	const store = createStore(
-		rootReducer, preLoadedState
-	);
+describe('main tests', () => {
+	it('renders without crashing', () => {
+		mSort(defaultState.items, defaultState.sortParams);
+		let preLoadedState = defaultState;
 
-	ReactDOM.render(
-		<Provider store={store}>
-			<App />
-		</Provider>,
-		div
-	);
+		const store = createStore(
+			rootReducer, preLoadedState
+		);
 
-  ReactDOM.unmountComponentAtNode(div);
+		ReactDOM.render(
+			<Provider store={store}>
+				<App />
+			</Provider>,
+			rootDiv
+		);
+	});
+
+	/*it('MainMenu show', () => {
+		console.log(document);
+		const mainMenu = document.querySelectorAll('.MainMenu');
+		expect(mainMenu.length).toEqual(1);
+	});*/
+
+	it('unmount without crashing', () => {
+		ReactDOM.unmountComponentAtNode(rootDiv);
+	});
 });
