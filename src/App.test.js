@@ -9,17 +9,19 @@ import rootReducer from './store/reducers/mainReducer'
 
 import { mSort } from './components/functions';
 
+import PagerFiller from './components/RTable/TableFooter/PagerFiller';
+import renderer from 'react-test-renderer';
+
 const rootDiv = document.createElement('div');
+mSort(defaultState.items, defaultState.sortParams);
+let preLoadedState = defaultState;
+
+const store = createStore(
+	rootReducer, preLoadedState
+);
 
 describe('main tests', () => {
 	it('renders without crashing', () => {
-		mSort(defaultState.items, defaultState.sortParams);
-		let preLoadedState = defaultState;
-
-		const store = createStore(
-			rootReducer, preLoadedState
-		);
-
 		ReactDOM.render(
 			<Provider store={store}>
 				<App />
@@ -28,11 +30,29 @@ describe('main tests', () => {
 		);
 	});
 
-	/*it('MainMenu show', () => {
-		console.log(document);
-		const mainMenu = document.querySelectorAll('.MainMenu');
-		expect(mainMenu.length).toEqual(1);
-	});*/
+	
+	//test for simple component, without redux
+	it("PagerFiller check", () => {
+		const component = renderer.create(<PagerFiller />);
+		let tree = component.toJSON();
+		expect(tree).toMatchSnapshot();
+
+		/* 
+		// manually trigger the callback
+			tree.props.onMouseEnter();
+			// re-rendering
+			tree = component.toJSON();
+			expect(tree).toMatchSnapshot();
+
+			// manually trigger the callback
+			tree.props.onMouseLeave();
+			// re-rendering
+			tree = component.toJSON();
+			expect(tree).toMatchSnapshot();
+   */
+	});
+
+	//redux tests: https://habr.com/ru/post/340514/
 
 	it('unmount without crashing', () => {
 		ReactDOM.unmountComponentAtNode(rootDiv);

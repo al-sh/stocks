@@ -1,19 +1,9 @@
 import React from 'react';
 import PagerItem from './PagerItem';
+import PagerFiller from './PagerFiller';
 
 //Redux
 import { connect } from 'react-redux';
-
-class PagerFiller extends React.Component {
-  render() {   
-    return (
-      <span className="pagerFiller">
-        ...
-      </span>
-    );
-  }
-}
-
 
 class TableFooter extends React.Component {  
   render() {    
