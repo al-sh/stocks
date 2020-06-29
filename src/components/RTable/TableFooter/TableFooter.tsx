@@ -1,15 +1,26 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PagerItem from './PagerItem';
 import PagerFiller from './PagerFiller';
+import { IState } from '../../../store/interfaces';
 
-//Redux
-import { connect } from 'react-redux';
+const mapStateToProps = (state: IState) => {
+  return {
+    activePage: state.settings.activePage,
+    rowsinPage: state.settings.rowsinPage,
+    rowsCount: state.items.length
+  }
+}
 
-class TableFooter extends React.Component {  
+interface IProps{
+  rowsinPage: number;
+  rowsCount: number;
+  activePage: number;
+}
+
+class TableFooter extends React.Component<IProps>  {  
   render() {    
-    const rowsinPage = this.props.rowsinPage;
-    const rowsCount = this.props.rowsCount;
-    const activePage = this.props.activePage;
+    const { rowsinPage, rowsCount, activePage } = this.props;
 
     const scPages = [];  
     let pagesCount = ((rowsCount - rowsCount % rowsinPage) / rowsinPage);  
@@ -19,8 +30,9 @@ class TableFooter extends React.Component {
     
     const nearPagesCount = 2;
     for(let i=0; i < pagesCount; i++){ 
-      let currentPage = {};
-      currentPage.pageNum = i; 
+      let currentPage = {
+        pageNum: i
+      };
       let pageItem = <PagerItem key={'pg'+currentPage.pageNum} data={currentPage} isActive={activePage===i?true:false} />;
 
       if (pagesCount>10) { //показываем только часть страниц
@@ -45,18 +57,8 @@ class TableFooter extends React.Component {
       }      
     }
 
-    //return scPages;
     return <div className="pageBlock">{scPages}</div>     
   } 
 }
 
-const mapStateToProps = (state) => {
-  return {
-    activePage: state.settings.activePage,
-    rowsinPage: state.settings.rowsinPage,
-    rowsCount: state.items.length
-  }
-}
-
-//export default TableFooter;
 export default connect(mapStateToProps)(TableFooter)
