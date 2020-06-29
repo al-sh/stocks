@@ -1,12 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit'; // TODO: добавить PayloadAction
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'; // TODO: добавить PayloadAction
 
 export const displaySettingsSlice = createSlice({
   name: 'displaySettingsSlice',
   initialState: 0,
   reducers: {
-    toggle: (state: any, action: any) => {
+    toggle: (state: any, action: PayloadAction<boolean>) => {
       let stateCopy = Object.assign({}, state);
-      stateCopy.settings.showDisplaySettings = action.showDisplaySettings;
+      stateCopy.settings.showDisplaySettings = action.payload;
       return stateCopy;
     },
     save: (state: any, action: any) => {

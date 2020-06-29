@@ -33,7 +33,7 @@ class TableFooter extends React.Component<IProps>  {
       let currentPage = {
         pageNum: i
       };
-      let pageItem = <PagerItem key={'pg'+currentPage.pageNum} data={currentPage} isActive={activePage===i?true:false} />;
+      let pageItem = <PagerItem key={'pg'+currentPage.pageNum} data={currentPage} isActive={activePage===i} />;
 
       if (pagesCount>10) { //показываем только часть страниц
         if ( (i===0) && (i < activePage - nearPagesCount) ){//первая страница

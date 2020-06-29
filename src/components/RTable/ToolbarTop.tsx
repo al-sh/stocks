@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { IState } from '../../store/interfaces';
+import { displaySettingsSlice } from '../../store/reducers/DisplaySettings'
 
 const mapState = (state: IState) => {
   return {
@@ -33,10 +34,7 @@ class ToolbarTop extends React.Component<IPropsFromRedux, IState> {
   }
 
   showDisplaySettings = () => {
-    this.props.dispatch({
-      type: 'DISPLAYSETTINGS.TOGGLE',
-      showDisplaySettings: true
-    });
+    this.props.dispatch(displaySettingsSlice.actions.toggle(true));
   }
 
   showTransfersAnalytics = () => {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { IState, IColumn } from '../../store/interfaces';
+import { displaySettingsSlice } from '../../store/reducers/DisplaySettings'
 
 const mapState = (state: IState) => {
   return {
@@ -11,7 +12,10 @@ const mapState = (state: IState) => {
 }
 
 const mapDispatch = (dispatch: any) => {
-  return { dispatch: (p: any) => { dispatch(p) } }
+  return {
+    dispatch: (p: any) => { dispatch(p) },
+    toggle: (payload: boolean) => displaySettingsSlice.actions.toggle(payload)
+  }
 }
 
 const connector = connect(mapState, mapDispatch);
@@ -34,10 +38,7 @@ class DisplaySettings extends React.Component<IPropsFromRedux, IState> {
   }
 
   close = () => {
-    this.props.dispatch({
-      type: 'DISPLAYSETTINGS.TOGGLE',
-      showDisplaySettings: false
-    });
+    this.props.dispatch(this.props.toggle(false));
   }
 
   onVisibleChange = (e: any) => {

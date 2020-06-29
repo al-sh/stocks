@@ -8,9 +8,7 @@ import Switch from './Switch'
 import { IState, ISettings } from '../interfaces';
 
 const goToPage = (state: IState, action: any) => {
-  let stateCopy = Object.assign({}, state);
-  stateCopy.settings.activePage = action.page;
-  return stateCopy;
+  return {...state, settings: {...state.settings, activePage: action.page} };
 }
 
 const updateItems = (state: IState, action: any) => {
@@ -130,7 +128,6 @@ const shiftClick = (state: IState, action: any) => {
 }
 
 const mainReducer = (state: IState, action: any) => {
-  console.log(displaySettingsSlice.actions);
   switch (action.type) {
     case 'ANALYTICS.TOGGLE': return Analytics.toggle(state, action);
     case 'ANALYTICS.TRANSFERS': return Analytics.transfers(state, action);
@@ -140,7 +137,7 @@ const mainReducer = (state: IState, action: any) => {
     case 'ITEM.EDIT': return Item.edit(state, action);
     case 'ITEMS.UPDATE': return updateItems(state, action);
 
-    case 'DISPLAYSETTINGS.TOGGLE': return displaySettingsSlice.caseReducers.toggle(state, action);
+    case 'displaySettingsSlice/toggle': return displaySettingsSlice.caseReducers.toggle(state, action);
     case 'DISPLAYSETTINGS.SAVE': return displaySettingsSlice.caseReducers.save(state, action);
 
     case 'SORT.RUN': return Sort.run(state, action);
