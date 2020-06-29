@@ -13,8 +13,8 @@ const mapState = (state: IState) => {
 
 const mapDispatch = (dispatch: any) => {
   return {
-    dispatch: (p: any) => { dispatch(p) },
-    toggle: (payload: boolean) => displaySettingsSlice.actions.toggle(payload)
+    dispatch,
+    close: () => dispatch(displaySettingsSlice.actions.toggle(false)),
   }
 }
 
@@ -35,10 +35,6 @@ class DisplaySettings extends React.Component<IPropsFromRedux, IState> {
       rowsinPage: this.state.rowsinPage,
       withCheckBoxes: this.state.withCheckBoxes
     });
-  }
-
-  close = () => {
-    this.props.dispatch(this.props.toggle(false));
   }
 
   onVisibleChange = (e: any) => {
@@ -69,7 +65,7 @@ class DisplaySettings extends React.Component<IPropsFromRedux, IState> {
   }
 
   render() {
-    const columns = this.props.columns;
+    const { columns, rowsinPage, withCheckBoxes, close } = this.props;
     let columnSettings = [];
     for (let i = 0; i < columns.length; i++) {
       columnSettings.push(
@@ -82,17 +78,17 @@ class DisplaySettings extends React.Component<IPropsFromRedux, IState> {
 
     return (
       <div className="itemBlock">
-        <button onClick={this.close} className="toolbarButton" style={{ float: 'right', height: '25px', width: '25px' }}>X</button>
+        <button onClick={close} className="toolbarButton" style={{ float: 'right', height: '25px', width: '25px' }}>X</button>
         <div>Настройка отображения полей</div>
         {columnSettings}
         <div>
           <span>Количество строк на странице:</span>
-          <input type="number" min={1} max={100} name="rowsPerPage" onChange={this.onRowsPerPageChange} defaultValue={this.props.rowsinPage}
+          <input type="number" min={1} max={100} name="rowsPerPage" onChange={this.onRowsPerPageChange} defaultValue={rowsinPage}
             style={{ marginLeft: '10px', width: '50px' }} />
         </div>
         <div>
           <label htmlFor={'inp_needCheckBoxes'}>Чекбоксы</label>
-          <input id={'inp_needCheckBoxes'} type="checkbox" onChange={this.onNeedCheckBoxesChange} defaultChecked={this.props.withCheckBoxes} />
+          <input id={'inp_needCheckBoxes'} type="checkbox" onChange={this.onNeedCheckBoxesChange} defaultChecked={withCheckBoxes} />
         </div>
         <div>
           <button onClick={this.save} className="toolbarButton" style={{ marginTop: '25px' }}>Сохранить</button>
